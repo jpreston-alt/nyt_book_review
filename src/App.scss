@@ -1,0 +1,28 @@
+@import "./variables.scss";
+
+.d-flex{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-grow{
+  flex-grow: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.icon-btn {
+  cursor: pointer;
+  color: $primary;
+}
+
+.icon-btn:hover {
+  cursor: pointer;
+  color: $secondary;
+}

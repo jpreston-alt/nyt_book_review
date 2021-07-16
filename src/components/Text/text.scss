@@ -1,0 +1,64 @@
+@import "../../variables.scss";
+
+.text--h1, .text--h2, .text--h3, .text--h4, .text--h5, .text--h6  {
+    font-family: $font-primary;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.text--h1 {
+    font-size: 42px;
+}
+.text--h2 {
+    font-size: 38px;
+}
+.text--h3 {
+    font-size: 34px;
+}
+.text--h4 {
+    font-size: 30px;
+}
+.text--h5 {
+    font-size: 26px;
+}
+.text--h6 {
+    font-size: 18px;
+}
+
+.text--text, .text--subtext {
+    font-family: $font-secondary;
+    font-weight: 300;
+}
+
+.text--text {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.text--subtext {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.text--uppercase {
+    text-transform: uppercase;
+}
+.text--capitalize {
+    text-transform: capitalize;
+}
+
+.text--primary {
+    color: $primary;
+}
+
+.text--secondary {
+    color: $secondary;
+}
+
+.text--darkgray{
+    color: $gray-dark;
+}
+.text--gray{
+    color: $gray;
+}

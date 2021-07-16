@@ -1,0 +1,28 @@
+@import "../../variables.scss";
+
+.button {
+    color: $primary;
+    padding: 8px 15px;
+    border-radius: $pill;
+    background: none;
+    border: 1px solid $primary;
+    cursor: pointer;
+    box-shadow: $box-shadow;
+}
+
+.button:hover {
+    color: white;
+    background-color: $primary;
+}
+
+.button--disabled {
+    color: white;
+    background-color: $primary-faded;
+    border: none;
+    cursor: auto;
+}
+
+.button--disabled:hover {
+    color: white;
+    background-color: $primary-faded;
+}

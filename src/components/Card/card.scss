@@ -1,0 +1,15 @@
+@import "../../variables.scss";
+
+.card {
+    box-shadow: $box-shadow;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.card:hover {
+    box-shadow: $box-shadow-hover;
+}
+
+.card--noShadow {
+   box-shadow: none !important; 
+}

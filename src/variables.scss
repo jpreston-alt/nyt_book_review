@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Roboto:wght@100;300;400&display=swap');
+
+// fonts
+$font-primary: 'Montserrat', sans-serif !important;
+$font-secondary: "Roboto", sans-serif !important;
+
+// colors
+$primary: #5b7edc;
+$primary-faded: #5b7ddcb4;
+$secondary: #374765;
+$gray: gray;
+$gray-dark: rgb(94, 94, 94);
+
+// shadows
+$box-shadow: 0 5px 15px rgba(0,0,0,.08);
+$box-shadow-hover: 0 15px 25px rgba(0,0,0,0.09);
+
+// border-radius
+$pill: 50px;

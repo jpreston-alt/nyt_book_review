@@ -1,0 +1,15 @@
+@import "../../variables.scss";
+
+.book-card {
+    -webkit-animation: fadein 4s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
