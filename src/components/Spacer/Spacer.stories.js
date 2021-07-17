@@ -11,18 +11,10 @@ const story = {
 export default story
 
 const Template = (args) => (
-    <Spacer {...args}>
-
-    </Spacer>
+    <Spacer {...args} />
 )
 
 export const Primary = Template.bind({})
 Primary.args = {
-    children: "primary",
-    onClick: () => console.log("you clicked me!")
-}
-export const Disabled = Template.bind({})
-Disabled.args = {
-    children: "disabled",
-    disabled: true
+    value: 40
 }

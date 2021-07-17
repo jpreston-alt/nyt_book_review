@@ -1,13 +1,14 @@
 import React from "react";
-import classnames from "classnames";
 import { Card, Text, Spacer, Button } from "../";
+import PropTypes from 'prop-types';
 import "./book-card.scss";
 
+// if description is longer than 50 characters, render first 50 only
 const renderDescription = (description) => {
     try {
-        if (description.length < 50) {
+        if (description && description.length < 50) {
             return description;
-        } else {
+        } else if (description) {
             return `${description.substring(0, 50)}...`;
         }
     } catch (e) {
@@ -19,18 +20,32 @@ const BookCard = (props) => {
     const { title, description, onClick } = props;
 
     return (
-        <Card>
-            <div className="book-card">
-                <Text size="h6" uppercase color="secondary">{title}</Text>
-                <Spacer value={10} />
-                <Text size="text" color="gray">{renderDescription(description)}</Text>
-                <Spacer value={15} />
-                <div className="text-center">
-                    <Button onClick={onClick}>Read Reviews</Button>
+        <div data-testid="bookcard" style={{ height: "100%" }}>
+            <Card>
+                <div className="book-card text-center">
+                    <Text size="h6" uppercase color="secondary">{title}</Text>
+                    <Spacer value={10} />
+                    <Text size="text" color="gray">{renderDescription(description)}</Text>
+                    <Spacer value={55} />
+                    <div className="text-center book-card__footer">
+                        <Button onClick={onClick}>Reviews</Button>
+                    </div>
                 </div>
-            </div>
-        </Card>
+            </Card>
+        </div>
     )
+};
+
+BookCard.propTypes = {
+    title: PropTypes.string,
+    description: PropTypes.string,
+    onClick: PropTypes.func
+};
+
+BookCard.defaultProps = {
+    title: "",
+    description: "",
+    onClick: () => console.log("open modal")
 };
 
 export default BookCard;

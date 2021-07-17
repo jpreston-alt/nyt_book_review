@@ -16,10 +16,10 @@ const Main = (props) => {
         getBooks();
     }, [])
 
+    // fetch books
     const getBooks = async () => {
         try {
             const _books = await queries.fetchBooks();
-            console.log("_BOOKS", _books);
             if (_books && _books.results && _books.results.books) {
                 setBooks(_books.results.books.splice(0, 10));
             }
@@ -28,13 +28,13 @@ const Main = (props) => {
         }
     }
 
+    // fetch book reviews and open modal
     const selectBookToReview = async (isbn, book) => {
         try {
             setBookToReview(book);
             setLoading(true);
             setOpen(true);
             const _reviews = await queries.fetchReviews(isbn);
-            console.log("_REVIEWS", _reviews);
             if (_reviews && _reviews.results) {
                 setReviewData(_reviews.results);
             }
@@ -48,6 +48,7 @@ const Main = (props) => {
         setOpen(false);
     }
 
+    // render review cards
     const renderReviews = () => {
         if (reviewData && reviewData.length > 0) {
             return <Grid container spacing={2}>
@@ -55,9 +56,6 @@ const Main = (props) => {
                     reviewData.map((el, index) => {
                         return <Grid item xs={12} sm={6}>
                             <Card>
-                                {/* <Text color="primary" size="h6">{el.byline}</Text>
-                                <Text color="subtext" size="gray">{el.publication_dt}</Text>
-                                <Spacer value={10} /> */}
                                 <div className="text-center">
                                     <Text size="text" color="darkgray">{el.summary}</Text>
                                     <Spacer value={20} />
@@ -87,7 +85,7 @@ const Main = (props) => {
                 {
                     loading ? (
                         <div className="text-center">
-                            <Text size="text">Loading Data</Text>
+                            <Text size="text">Loading Reviews</Text>
                             <Spacer value={10} />
                             <CircularProgress />
                         </div>
@@ -97,7 +95,8 @@ const Main = (props) => {
             </Modal>
             <div className="main__title-container">
                 <Text size="h1" uppercase color="primary">NYT Book Review</Text>
-                <Spacer value={20} />
+                <Text size="subtext" color="gray">Trade Fiction Paperback</Text>
+                <Spacer value={10} />
             </div>
             <div className="main__card-container">
                 <Grid container spacing={2}>

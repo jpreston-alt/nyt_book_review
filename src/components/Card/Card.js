@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 import "./card.scss";
 
 const Card = (props) => {
@@ -11,10 +12,18 @@ const Card = (props) => {
 
 
     return (
-        <div className={classnames(classes)}>
+        <div className={classnames(classes)} data-testid="card">
             {props.children}
         </div>
     )
+};
+
+Card.propTypes = {
+    noShadow: PropTypes.bool,
+};
+
+Card.defaultProps = {
+    noShadow: false,
 };
 
 export default Card;

@@ -1,8 +1,8 @@
 const apiKey = process.env.REACT_APP_API_KEY;
 
+// fetch trade fiction paperback books
 const fetchBooks = async () => {
     let results = [];
-    // const list = "hardcover-fiction";
     const list = "trade-fiction-paperback";
     const date = "current";
     await fetch(`https://api.nytimes.com/svc/books/v3/lists/${date}/${list}?api-key=${apiKey}`, {
@@ -19,9 +19,9 @@ const fetchBooks = async () => {
     return results;
 };
 
+// fetch reviews based on isbn
 const fetchReviews = async (isbn) => {
     let results = [];
-    // await fetch(`https://api.nytimes.com/svc/books/v3/reviews.json?author=Stephen+King&api-key=${apiKey}`, {
     await fetch(`https://api.nytimes.com/svc/books/v3/reviews.json?isbn=${isbn}&api-key=${apiKey}`, {
     })
         .then(response => response.json())

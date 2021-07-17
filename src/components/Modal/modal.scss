@@ -1,5 +1,12 @@
 @import "../../variables.scss";
 
+.modal {
+    &__body {
+        padding: 25px;
+    }
+}
+
+
 .MuiDialog-paperWidthSm {
     padding: 20px;
     border-radius: 20px !important;

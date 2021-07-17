@@ -11,9 +11,7 @@ const story = {
 export default story
 
 const Template = (args) => (
-    <Button {...args}>
-
-    </Button>
+    <Button {...args} />
 )
 
 export const Primary = Template.bind({})
