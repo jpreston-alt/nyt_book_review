@@ -3,6 +3,7 @@
 ## Description
 
 NYT Book Review is an application that utilizes the NYT Books API to display best selling books in different categories. Users may view reviews, if available, on selected books.
+<img src="./public/images/landingPage.png" alt="landing page" width="45%" style="margin: 10px;"/>
 
 ## Installation
 
