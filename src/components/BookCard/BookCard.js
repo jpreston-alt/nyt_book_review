@@ -6,7 +6,7 @@ import "./book-card.scss";
 // if description is longer than 50 characters, render first 50 only
 const renderDescription = (description) => {
     try {
-        if (description && description.length < 50) {
+        if (description && description.length < 51) {
             return description;
         } else if (description) {
             return `${description.substring(0, 50)}...`;
@@ -39,7 +39,9 @@ const BookCard = (props) => {
             >
                 <Text size="h6" uppercase color="secondary">{title}</Text>
                 <hr />
-                <Text size="text" color="gray">{descToShow ? descToShow : "No Description Available"}</Text>
+                <Text size="text" color="gray" testid="description">
+                    {descToShow ? descToShow : "No Description Available"}
+                </Text>
                 <Spacer value={55} />
                 <div className="text-center book-card__footer">
                     <Button onClick={onClick}>Reviews</Button>

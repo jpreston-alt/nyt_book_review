@@ -16,13 +16,13 @@ const Text = (props) => {
 
     if (inline) {
         return (
-            <span className={classnames(classes)} data-testid="text">
+            <span className={classnames(classes)} data-testid={props.testid ? props.testid : "text"}>
                 {props.children}
             </span>
         )
     } else {
         return (
-            <div className={classnames(classes)} data-testid="text">
+            <div className={classnames(classes)} data-testid={props.testid ? props.testid : "text"}>
                 {props.children}
             </div>
         )
