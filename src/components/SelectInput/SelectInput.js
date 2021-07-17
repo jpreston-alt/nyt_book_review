@@ -9,7 +9,7 @@ const SelectInput = (props) => {
     const { options, value, onChange, placeholder } = props;
 
     return (
-        <FormControl className="select-input">
+        <FormControl className="select-input" data-testid="select-input">
             <Select
                 value={value}
                 onChange={onChange}

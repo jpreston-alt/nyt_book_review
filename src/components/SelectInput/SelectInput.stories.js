@@ -1,20 +1,36 @@
-// import React from 'react'
-// import Spacer from './Spacer'
+import React from 'react'
+import SelectInput from './SelectInput'
 
-// const story = {
-//     title: 'Components/Spacer',
-//     component: Spacer,
-//     argTypes: {
+const story = {
+    title: 'Components/SelectInput',
+    component: SelectInput,
+    argTypes: {
 
-//     },
-// }
-// export default story
+    },
+}
+export default story
 
-// const Template = (args) => (
-//     <Spacer {...args} />
-// )
+const Template = (args) => (
+    <SelectInput {...args} />
+)
 
-// export const Primary = Template.bind({})
-// Primary.args = {
-//     value: 40
-// }
+export const Default = Template.bind({})
+Default.args = {
+    placeholder: "Please Select an Option",
+    value: "option2Value",
+    onChange: () => console.log("value"),
+    options: [
+        {
+            name: "Option 1 Name",
+            value: "option1Value",
+        },
+        {
+            name: "Option 2 Name",
+            value: "option2Value",
+        },
+        {
+            name: "Option 3 Name",
+            value: "option3Value",
+        },
+    ]
+}

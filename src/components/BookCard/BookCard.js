@@ -39,8 +39,7 @@ const BookCard = (props) => {
             >
                 <Text size="h6" uppercase color="secondary">{title}</Text>
                 <hr />
-                {/* <Spacer value={10} /> */}
-                <Text size="text" color="gray">{descToShow}</Text>
+                <Text size="text" color="gray">{descToShow ? descToShow : "No Description Available"}</Text>
                 <Spacer value={55} />
                 <div className="text-center book-card__footer">
                     <Button onClick={onClick}>Reviews</Button>

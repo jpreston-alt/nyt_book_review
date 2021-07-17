@@ -27,7 +27,7 @@ const Main = (props) => {
         try {
             const _books = await queries.fetchBooks(list);
             if (_books && _books.results && _books.results.books) {
-                setBooks(_books.results.books.splice(0, 10));
+                setBooks(_books.results.books.splice(0, 9));
             }
         } catch (e) {
             console.log(e);
@@ -83,7 +83,7 @@ const Main = (props) => {
             return <Grid container spacing={2}>
                 {
                     reviewData.map((el, index) => {
-                        return <Grid item xs={12} sm={6}>
+                        return <Grid item xs={12} sm={6} key={index}>
                             <Card>
                                 <div className="text-center">
                                     <Text size="text" color="darkgray">{el.summary}</Text>
