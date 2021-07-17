@@ -8,7 +8,7 @@ const fetchBooks = async (list) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success retrieving book data:', data);
+            // console.log('Success retrieving book data:', data);
             results = data;
         })
         .catch((error) => {
@@ -25,7 +25,7 @@ const fetchReviews = async (isbn) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success retrieving review data:', data);
+            // console.log('Success retrieving review data:', data);
             results = data;
         })
         .catch((error) => {
@@ -42,7 +42,7 @@ const fetchListNames = async () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success retrieving list names:', data);
+            // console.log('Success retrieving list names:', data);
             results = data;
         })
         .catch((error) => {

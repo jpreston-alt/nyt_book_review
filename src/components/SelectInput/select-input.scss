@@ -1,13 +1,14 @@
 @import "../../variables.scss";
 
 .select-input {
-    width: 100%;
+    // width: 100%;
     border: 1px solid $gray-light !important;
     border-radius: 5px;
     box-shadow: $box-shadow !important;
     margin-top: 15px !important;
     font-size: 5px !important;
     padding: 5px !important;
+    padding-left: 100px !important;
 }
 
 .MuiInputBase-input {

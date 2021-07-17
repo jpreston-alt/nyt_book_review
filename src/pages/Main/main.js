@@ -13,8 +13,10 @@ const Main = (props) => {
     const [bookToReview, setBookToReview] = useState(null);
     const [listNames, setListNames] = useState([]);
     const [category, setCategory] = useState("trade-fiction-paperback");
+    const [errorMessage, setErrorMessage] = useState({ show: false, message: "An error occured" })
 
     useEffect(() => {
+        setErrorMessage({ show: false, message: "An error occured" });
         getListNames();
     }, [])
 
@@ -25,10 +27,14 @@ const Main = (props) => {
     // fetch books
     const getBooks = async (list) => {
         try {
+            setLoading(true);
             const _books = await queries.fetchBooks(list);
             if (_books && _books.results && _books.results.books) {
                 setBooks(_books.results.books.splice(0, 9));
+            } else if (_books && _books.fault) {
+                setErrorMessage({ show: true, message: _books.fault.faultstring });
             }
+            setLoading(false);
         } catch (e) {
             console.log(e);
         }
@@ -38,7 +44,6 @@ const Main = (props) => {
     const getListNames = async () => {
         try {
             const _listNames = await queries.fetchListNames();
-            console.log("LISTNAMES", _listNames);
             if (_listNames && _listNames.results && _listNames.results.length > 0) {
                 let mapped = _listNames.results.map(el => {
                     return {
@@ -47,6 +52,8 @@ const Main = (props) => {
                     }
                 })
                 setListNames(mapped);
+            } else if (_listNames && _listNames.fault) {
+                setErrorMessage({ show: true, message: _listNames.fault.faultstring });
             }
         } catch (e) {
             console.log(e);
@@ -62,6 +69,8 @@ const Main = (props) => {
             const _reviews = await queries.fetchReviews(isbn);
             if (_reviews && _reviews.results) {
                 setReviewData(_reviews.results);
+            } else if (_reviews && _reviews.fault) {
+                setErrorMessage({ show: true, message: _reviews.fault.faultstring });
             }
             setLoading(false);
         } catch (e) {
@@ -105,23 +114,6 @@ const Main = (props) => {
 
     return (
         <div className="main">
-            <Modal
-                open={open}
-                onClose={onClose}
-                title={bookToReview && `${bookToReview.title}`}
-                subtitle={bookToReview && `By ${bookToReview.author}`}
-            >
-                {
-                    loading ? (
-                        <div className="text-center">
-                            <Text size="text" color="darkgray">Loading Reviews</Text>
-                            <Spacer value={10} />
-                            <CircularProgress />
-                        </div>
-                    ) : renderReviews()
-                }
-
-            </Modal>
             <div className="main__title-container">
                 <Grid container spacing={1}>
                     <Grid item sm>
@@ -144,6 +136,14 @@ const Main = (props) => {
             </div>
             <Spacer value={10} />
             <div className="main__card-container">
+                {
+                    errorMessage.show === true && (
+                        <div>
+                            <Text size="text">Error: {errorMessage.message}</Text>
+                            <Text size="text">This error is likely due to too many requests, please wait a second and then refresh the page</Text>
+                        </div>
+                    )
+                }
                 <Grid container spacing={2}>
                     {
                         books && books.length > 0 ? (
@@ -167,6 +167,31 @@ const Main = (props) => {
                     }
                 </Grid>
             </div>
+            <Modal
+                open={open}
+                onClose={onClose}
+                title={bookToReview && `${bookToReview.title}`}
+                subtitle={bookToReview && `By ${bookToReview.author}`}
+            >
+                {
+                    errorMessage.show === true && (
+                        <div>
+                            <Text size="text">Error: {errorMessage.message}</Text>
+                            <Text size="text">This error is likely due to too many requests, please wait a second and then refresh the page</Text>
+                        </div>
+                    )
+                }
+                {
+                    loading ? (
+                        <div className="text-center">
+                            <Text size="text" color="darkgray">Loading Reviews</Text>
+                            <Spacer value={10} />
+                            <CircularProgress />
+                        </div>
+                    ) : renderReviews()
+                }
+
+            </Modal>
         </div>
     )
 };
