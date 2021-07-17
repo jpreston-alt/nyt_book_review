@@ -13,7 +13,7 @@ const Modal = (props) => {
         <div data-testid="modal">
             <Dialog open={open} onClose={onClose}>
                 <Grid container spacing={1}>
-                    <Grid item sm={10}>
+                    <Grid item xs={8} sm={10}>
                         <Text size="h5" uppercase color="primary">{title}</Text>
                         {
                             subtitle && (
@@ -21,7 +21,7 @@ const Modal = (props) => {
                             )
                         }
                     </Grid>
-                    <Grid item sm>
+                    <Grid item xs sm>
                         <div className="text-right" onClick={onClose}>
                             <VscChromeClose className="icon-btn" />
                         </div>

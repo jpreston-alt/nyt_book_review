@@ -9,7 +9,7 @@ test("should render a card component", () => {
     render(<BookCard />);
     const bookCardEl = screen.getByTestId("bookcard");
     expect(bookCardEl).toBeInTheDocument();
-    expect(bookCardEl.firstChild.classList.contains('card')).toBe(true);
+    expect(bookCardEl.classList.contains('card')).toBe(true);
 });
 
 test("should render a card component with provided title", () => {

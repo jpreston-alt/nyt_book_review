@@ -31,12 +31,24 @@ body {
   color: $secondary;
 }
 
+hr {
+  width: 10px;
+  margin: 15px auto 15px auto;
+  background-color: $primary-faded;
+  height: 1px;
+  border: none;
+}
+
 @media only screen and (max-width: 460px) {
   .text--h1 {
     font-size: 24px !important;
   }
 
   .text--h6 {
+    font-size: 16px !important;
+  }
+
+  .text--h5 {
     font-size: 16px !important;
   }
 }

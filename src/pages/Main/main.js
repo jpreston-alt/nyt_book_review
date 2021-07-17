@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./main.scss";
 import * as queries from "../../queries/nytApi";
-import { BookCard, Text, Spacer, Modal, Card } from "../../components";
+import { BookCard, Text, Spacer, Modal, Card, SelectInput } from "../../components";
 import Grid from '@material-ui/core/Grid';
 import { CircularProgress } from '@material-ui/core';
 
@@ -11,17 +11,42 @@ const Main = (props) => {
     const [reviewData, setReviewData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [bookToReview, setBookToReview] = useState(null);
+    const [listNames, setListNames] = useState([]);
+    const [category, setCategory] = useState("trade-fiction-paperback");
 
     useEffect(() => {
-        getBooks();
+        getListNames();
     }, [])
 
+    useEffect(() => {
+        getBooks(category);
+    }, [category])
+
     // fetch books
-    const getBooks = async () => {
+    const getBooks = async (list) => {
         try {
-            const _books = await queries.fetchBooks();
+            const _books = await queries.fetchBooks(list);
             if (_books && _books.results && _books.results.books) {
                 setBooks(_books.results.books.splice(0, 10));
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // fetch list names
+    const getListNames = async () => {
+        try {
+            const _listNames = await queries.fetchListNames();
+            console.log("LISTNAMES", _listNames);
+            if (_listNames && _listNames.results && _listNames.results.length > 0) {
+                let mapped = _listNames.results.map(el => {
+                    return {
+                        name: el.display_name,
+                        value: el.list_name_encoded
+                    }
+                })
+                setListNames(mapped);
             }
         } catch (e) {
             console.log(e);
@@ -48,6 +73,10 @@ const Main = (props) => {
         setOpen(false);
     }
 
+    const handleInputChange = (event) => {
+        setCategory(event.target.value);
+    }
+
     // render review cards
     const renderReviews = () => {
         if (reviewData && reviewData.length > 0) {
@@ -69,7 +98,7 @@ const Main = (props) => {
         } else {
             return <div className="text-center">
                 <Spacer value={10} />
-                <Text size={"text"}>No Reviews Available</Text>
+                <Text size={"text"} color="darkgray">No Reviews Available</Text>
             </div>
         }
     }
@@ -85,7 +114,7 @@ const Main = (props) => {
                 {
                     loading ? (
                         <div className="text-center">
-                            <Text size="text">Loading Reviews</Text>
+                            <Text size="text" color="darkgray">Loading Reviews</Text>
                             <Spacer value={10} />
                             <CircularProgress />
                         </div>
@@ -94,10 +123,26 @@ const Main = (props) => {
 
             </Modal>
             <div className="main__title-container">
-                <Text size="h1" uppercase color="primary">NYT Book Review</Text>
-                <Text size="subtext" color="gray">Trade Fiction Paperback</Text>
-                <Spacer value={10} />
+                <Grid container spacing={1}>
+                    <Grid item sm>
+                        <Text size="h1" uppercase color="primary">NYT Book Review</Text>
+                    </Grid>
+                    {
+                        listNames && listNames.length > 0 && (
+                            <Grid item sm={4}>
+                                <div className="text-right">
+                                    <SelectInput
+                                        options={listNames}
+                                        onChange={handleInputChange}
+                                        value={category}
+                                    />
+                                </div>
+                            </Grid>
+                        )
+                    }
+                </Grid>
             </div>
+            <Spacer value={10} />
             <div className="main__card-container">
                 <Grid container spacing={2}>
                     {

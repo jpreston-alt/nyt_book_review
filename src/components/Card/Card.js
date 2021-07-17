@@ -12,7 +12,7 @@ const Card = (props) => {
 
 
     return (
-        <div className={classnames(classes)} data-testid="card">
+        <div className={classnames(classes)} data-testid={props.testid ? props.testid : "card"}>
             {props.children}
         </div>
     )

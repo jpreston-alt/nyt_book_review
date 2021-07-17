@@ -3,10 +3,11 @@
 .book-card {
     position: relative;
     height: 100%;
+    cursor: pointer;
 
     &__footer {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
     }
 }

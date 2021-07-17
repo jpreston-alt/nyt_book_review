@@ -1,9 +1,8 @@
 const apiKey = process.env.REACT_APP_API_KEY;
 
 // fetch trade fiction paperback books
-const fetchBooks = async () => {
+const fetchBooks = async (list) => {
     let results = [];
-    const list = "trade-fiction-paperback";
     const date = "current";
     await fetch(`https://api.nytimes.com/svc/books/v3/lists/${date}/${list}?api-key=${apiKey}`, {
     })
@@ -36,7 +35,25 @@ const fetchReviews = async (isbn) => {
     return results;
 };
 
+// fetch best seller list names
+const fetchListNames = async () => {
+    let results = [];
+    await fetch(`https://api.nytimes.com/svc/books/v3/lists/names.json?&api-key=${apiKey}`, {
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success retrieving list names:', data);
+            results = data;
+        })
+        .catch((error) => {
+            console.error('Error retrieving list names:', error);
+        });
+
+    return results;
+};
+
 export {
     fetchBooks,
-    fetchReviews
+    fetchReviews,
+    fetchListNames
 }

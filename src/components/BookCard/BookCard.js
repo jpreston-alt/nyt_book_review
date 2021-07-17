@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Text, Spacer, Button } from "../";
 import PropTypes from 'prop-types';
 import "./book-card.scss";
@@ -18,21 +18,35 @@ const renderDescription = (description) => {
 
 const BookCard = (props) => {
     const { title, description, onClick } = props;
+    const [descToShow, setDescToShow] = useState("");
+    const [hoverState, setHoverState] = useState(false);
+
+    // on hover show full decription
+    useEffect(() => {
+        if (hoverState && description) {
+            setDescToShow(description);
+        } else {
+            setDescToShow(renderDescription(description));
+        }
+    }, [hoverState, description]);
 
     return (
-        <div data-testid="bookcard" style={{ height: "100%" }}>
-            <Card>
-                <div className="book-card text-center">
-                    <Text size="h6" uppercase color="secondary">{title}</Text>
-                    <Spacer value={10} />
-                    <Text size="text" color="gray">{renderDescription(description)}</Text>
-                    <Spacer value={55} />
-                    <div className="text-center book-card__footer">
-                        <Button onClick={onClick}>Reviews</Button>
-                    </div>
+        <Card testid={"bookcard"}>
+            <div
+                className="book-card text-center"
+                onMouseEnter={() => setHoverState(true)}
+                onMouseLeave={() => setHoverState(false)}
+            >
+                <Text size="h6" uppercase color="secondary">{title}</Text>
+                <hr />
+                {/* <Spacer value={10} /> */}
+                <Text size="text" color="gray">{descToShow}</Text>
+                <Spacer value={55} />
+                <div className="text-center book-card__footer">
+                    <Button onClick={onClick}>Reviews</Button>
                 </div>
-            </Card>
-        </div>
+            </div>
+        </Card>
     )
 };
 
